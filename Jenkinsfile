@@ -17,7 +17,11 @@ pipeline {
             steps {
                 echo 'Executando testes'
                 sh 'rspec -fd --format RspecJunitFormatter --out rspec.xml'
-                junit 'rspec.xml'
+            }
+            post {
+                always {
+                    junit 'rspec.xml'
+                }
             }
         }
         stage('UAT') {
